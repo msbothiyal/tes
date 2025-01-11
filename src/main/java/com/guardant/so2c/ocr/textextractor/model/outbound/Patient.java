@@ -1,0 +1,31 @@
+package com.guardant.so2c.ocr.textextractor.model.outbound;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Objects;
+
+/*
+ * @author hsahu
+ * @date 17/08/21,1:00 PM
+ */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Patient {
+  @JsonProperty("Identification")
+  private Identification identification;
+
+  @JsonProperty("Demographics")
+  private Demographics demographics;
+
+  @JsonIgnore
+  public boolean isPatientInfoAbsent() {
+    return Objects.isNull(demographics) || demographics.isMandatoryFieldAbsent();
+  }
+}
